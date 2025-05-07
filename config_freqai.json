@@ -1,96 +1,123 @@
-{
-    "$schema": "https://schema.freqtrade.io/schema.json",
-    "trading_mode": "spot",
-    "max_open_trades": 5,
-    "stake_currency": "USDT",
-    "stake_amount": 200,
-    "tradable_balance_ratio": 1,
-    "fiat_display_currency": "USD",
-    "dry_run": true,
-    "timeframe": "3m",
-    "dry_run_wallet": 1000,
-    "cancel_open_orders_on_exit": true,
-    "unfilledtimeout": {
-        "entry": 10,
-        "exit": 30
-    },
-    "exchange": {
-        "name": "binance",
-        "key": "",
-        "secret": "",
-        "ccxt_config": {
-            "enableRateLimit": true,
-            "options": {
-                "defaultType": "spot"
-            }
-        },
-        "ccxt_async_config": {},
-        "pair_whitelist": [
-            "ALGO/USDT"
-        ],
-        "pair_blacklist": []
-    },
-    "entry_pricing": {
-        "price_side": "same",
-        "use_order_book": true,
-        "order_book_top": 1,
-        "price_last_balance": 0.0,
-        "check_depth_of_market": {
-            "enabled": false,
-            "bids_to_ask_delta": 1
-        }
-    },
-    "exit_pricing": {
-        "price_side": "other",
-        "use_order_book": true,
-        "order_book_top": 1
-    },
-    "pairlists": [
-        {
-            "method": "StaticPairList"
-        }
-    ],
-    "freqai": {
-        "enabled": true,
-        "purge_old_models": 2,
-        "train_period_days": 15,
-        "backtest_period_days": 7,
-        "live_retrain_hours": 0,
-        "identifier": "unique-id",
-        "feature_parameters": {
-            "include_timeframes": [
-                "3m"
-            ],
-            "include_corr_pairlist": [
-                "BTC/USDT",
-                "ETH/USDT"
-            ],
-            "label_period_candles": 20,
-            "include_shifted_candles": 1,
-            "DI_threshold": 0.9,
-            "weight_factor": 0.9,
-            "principal_component_analysis": false,
-            "use_SVM_to_remove_outliers": true,
-            "indicator_periods_candles": [
-                10,
-                20
-            ],
-            "plot_feature_importances": 0
-        },
-        "data_split_parameters": {
-            "test_size": 0.33,
-            "random_state": 1
-        },
-        "model_training_parameters": {
-            "force_col_wise": true,
-            "metric": ["l2", "l1", "rmse", "mae", "mape", "huber", "fair", "poisson", "gamma", "tweedie"]
-        },
-        "activate_tensorboard": true
-    },
-    "bot_name": "",
-    "force_entry_enable": true,
-    "initial_state": "running",
-    "internals": {
-        "process_throttle_secs": 5
-    }
+{  
+  "$schema": "https://schema.freqtrade.io/schema.json",  
+  "trading_mode": "spot",  
+  "max_open_trades": 5,  
+  "stake_currency": "USDT",  
+  "stake_amount": 200,  
+  "tradable_balance_ratio": 1,  
+  "fiat_display_currency": "USD",  
+  "dry_run": true,  
+  "timeframe": "3m",  
+  "dry_run_wallet": 1000,  
+  "cancel_open_orders_on_exit": true,  
+  "unfilledtimeout": {  
+    "entry": 10,  
+    "exit": 30  
+  },  
+  "exchange": {  
+    "name": "binance",  
+    "key": "BnMien0HOYfo5VkcYwLOO7jlFJxiwmWlGf2XcU2EoH18Xb7bo4XsBTSj8GA3SkLY",  
+    "secret": "thpS1IcLBGph27pdTLj4TrSAnktB2o8yapuEZZoYRCo6JpSucqUwOBkMzgTx5pou",  
+    "ccxt_config": {  
+      "enableRateLimit": true,  
+      "options": {  
+        "defaultType": "spot"  
+      }  
+    },  
+    "pair_whitelist": ["BTC/USDT"],  
+    "order_types": ["limit", "market"],  
+    "use_order_book_for_order_type": false,  
+    "use_order_book_for_price": true,  
+    "fee_structure": {  
+      "maker": 0.1,  
+      "taker": 0.1  
+    },  
+    "max_order_age": 3600  
+  },  
+  "entry_pricing": {  
+    "price_side": "same",  
+    "use_order_book": true,  
+    "order_book_top": 1,  
+    "check_depth_of_market": {  
+      "enabled": false  
+    },  
+    "use_ema_cross_for_entry": true  
+  },  
+  "exit_pricing": {  
+    "price_side": "same",  
+    "use_order_book": true,  
+    "order_book_top": 1,  
+    "check_depth_of_market": {  
+      "enabled": false  
+    }  
+  },  
+  "pairlists": [  
+    {  
+      "method": "StaticPairList",  
+      "randomize_pairs": true,  
+      "max_pairs": 10  
+    }  
+  ],  
+  "freqai": {  
+    "enabled": true,  
+    "force_retrain": true,
+    "purge_old_models": 2,  
+    "train_period_days": 730,  
+    "backtest_period_days": 7,  
+    "live_retrain_hours": 10,  
+    "identifier": "unique-id-new",  
+    "conv_width": 30,  
+    "feature_parameters": {  
+      "include_timeframes": ["3m"],  
+      "include_corr_pairlist": ["BTC/USDT", "ETH/USDT"],  
+      "label_period_candles": 20,  
+      "indicator_periods_candles": [10, 20],  
+      "plot_feature_importances": 0,  
+      "principal_component_analysis": false,  
+      "use_SVM_to_remove_outliers": true,  
+      "include_shifted_candles": 0,  
+      "normalize_data": true  
+    },  
+    "data_split_parameters": {  
+      "test_size": 0.33,  
+      "random_state": 1,  
+      "shuffle": true  
+    },  
+    "model_training_parameters": {  
+      "learning_rate": 0.001,  
+      "trainer_kwargs": {  
+        "n_steps": 5000,  
+        "batch_size": 32,  
+        "n_epochs": 50  
+      },  
+      "model_kwargs": {  
+        "hidden_dim": 512,  
+        "dropout_percent": 0.2,  
+        "n_layer": 1  
+      }  
+    },  
+    "activate_tensorboard": true  
+  },  
+  "bot_name": "MyFreqBot",  
+  "force_entry_enable": true,  
+  "initial_state": "running",  
+  "internals": {  
+    "process_throttle_secs": 5,  
+    "debug": false,  
+    "log_level": "info",  
+    "auto_restart": true,  
+    "check_balance_interval_minutes": 15  
+  },  
+  "risk_management": {  
+    "stop_loss": 0.02,  
+    "take_profit": 0.05,  
+    "trailing_stop": 0.03,  
+    "leverage": 1  
+  },  
+  "logging": {  
+    "log_to_file": true,  
+    "log_file_path": "/var/log/freqai.log",  
+    "max_log_size_mb": 100,  
+    "keep_logs_days": 30  
+  }  
 }

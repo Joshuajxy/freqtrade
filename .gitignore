@@ -1,17 +1,17 @@
 # Freqtrade rules
-config*.json
+# config*.json
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
 logfile.txt
-user_data/*
-!user_data/strategy/sample_strategy.py
-!user_data/notebooks
-!user_data/models
-!user_data/freqaimodels
-user_data/freqaimodels/*
+# Ignore subdirectories, but NOT config files
 user_data/models/*
+user_data/freqaimodels/*
+!user_data/freqaimodels/TransformerModel.py
 user_data/notebooks/*
+# Do NOT ignore config files
+!user_data/config_freqai.example.json
+!user_data/config.json
 freqtrade-plot.html
 freqtrade-profit-plot.html
 freqtrade/rpc/api_server/ui/*
